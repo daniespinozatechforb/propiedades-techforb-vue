@@ -285,8 +285,6 @@ const prevPage = () => {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/variables.scss';
-
 .carousel-section {
   width: 100%;
   background-color: #f8f9fb;
@@ -324,7 +322,7 @@ const prevPage = () => {
     border: none;
     font-size: 2rem;
     cursor: pointer;
-    color: $secondary-color;
+    color: #2a6496;
     padding: 0 1rem;
 
     &:disabled {
@@ -387,7 +385,7 @@ const prevPage = () => {
 
   &__price {
     font-size: 1.1rem;
-    color: $secondary-color;
+    color: #2a6496;
     font-weight: bold;
   }
 

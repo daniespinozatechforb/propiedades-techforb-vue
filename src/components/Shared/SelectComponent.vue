@@ -33,7 +33,6 @@ const props = withDefaults(defineProps<Props>(), {
 <style scoped lang="scss">
 .dropdown {
   position: relative;
-  //width: 100%;
 
   &__label {
     font-size: 14px;

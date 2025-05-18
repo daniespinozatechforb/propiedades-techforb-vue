@@ -19,7 +19,7 @@ const props = defineProps<{
   placeholder?: string
 }>()
 
-const inputId = 'inputField' // Podrías hacer esto dinámico si se requiere único
+const inputId = 'inputField'
 
 const placeholder = computed(() => props.placeholder || 'Buscar por ubicación o palabra clave...')
 </script>

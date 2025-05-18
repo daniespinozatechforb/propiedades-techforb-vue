@@ -57,7 +57,6 @@ import InputSearchComponent from '../Shared/InputSearchComponent.vue'
 import SelectComponent from '../Shared/SelectComponent.vue'
 
 const activeTab = ref('buy')
-//const searchTerm = ref('');
 
 const setActiveTab = (tab: string) => {
   activeTab.value = tab

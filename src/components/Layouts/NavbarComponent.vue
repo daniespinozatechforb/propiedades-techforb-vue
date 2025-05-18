@@ -9,7 +9,10 @@
           <li><a href="#" class="link-list__item">Inicio</a></li>
           <li><a href="#" class="link-list__item">Nosotros</a></li>
           <li><a href="#" class="link-list__item">Propiedades</a></li>
-          <li><a href="#" class="link-list__item" @click.prevent="handleLogin">Login</a></li>
+          <li>
+            <a href="#" class="link-list__item" v-if="!displayName" @click.prevent="login">Login</a>
+            <a href="#" class="link-list__item" v-else @click.prevent="logout">Logout</a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -18,28 +21,35 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-//import { useRouter } from 'vue-router';
-//import ModalComponent from '@/shared/Modal.vue';
 import { signInWithPopup /* auth, provider */ } from '@/firebase'
-import { getAuth, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signOut } from 'firebase/auth'
 import router from '@/router'
 
-//const router = useRouter();
 const isMenuOpen = ref(false)
+const displayName = ref(localStorage.getItem('displayName'))
 
-const handleLogin = () => {
+const login = () => {
   const provider = new GoogleAuthProvider()
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       const user = result.user
       if (user.displayName) {
         localStorage.setItem('displayName', user.displayName)
+        displayName.value = user.displayName
       }
       router.push('/home')
     })
     .catch((error) => {
       console.log(error)
     })
+}
+
+const logout = () => {
+  signOut(getAuth()).then(() => {
+    localStorage.removeItem('displayName')
+    displayName.value = null
+    router.push('/login')
+  })
 }
 </script>
 
