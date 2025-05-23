@@ -10,34 +10,36 @@
           <ButtonComponent
             text="Comprar"
             type="tab"
-            :isActive="activeTab === 'buy'"
-            @click="setActiveTab('buy')"
+            :isActive="tipoOperacion === 'Venta'"
+            @click="setActiveTab('Venta')"
           />
           <ButtonComponent
             text="Alquilar"
             type="tab"
-            :isActive="activeTab === 'rent'"
-            @click="setActiveTab('rent')"
+            :isActive="tipoOperacion === 'Alquiler'"
+            @click="setActiveTab('Alquiler')"
           />
         </div>
         <div class="hero__form">
           <div class="hero__input-search">
-            <InputSearchComponent type="text" />
+            <InputSearchComponent v-model="ubicacion" type="text" />
           </div>
           <div class="hero__search">
             <SelectComponent
+              v-model="tipoPropiedad"
               :fieldStandard="true"
               :options="['Departamento', 'Casa', 'Ph']"
-              placeholder="Departamento"
             />
             <SelectComponent
+              v-model="ambientes"
               :fieldStandard="true"
-              :options="['1 ambiente', '2 ambientes', '3 ambientes']"
+              :options="['1', '2', '3']"
               placeholder="Ambientes"
             />
             <SelectComponent
+              v-model="precio"
               :fieldStandard="true"
-              :options="['$100', '$200', '$300']"
+              :options="['100', '200', '300', '100000']"
               placeholder="Precio"
             />
             <ButtonComponent icon="tune" type="filter" />
@@ -47,6 +49,7 @@
       </div>
     </div>
   </section>
+  <ModalComponent v-if="showModal" :results="response" @close="showModal = false" />
 </template>
 
 <script setup lang="ts">
@@ -55,20 +58,45 @@ import NavbarComponent from '../Layouts/NavbarComponent.vue'
 import ButtonComponent from '../Shared/ButtonComponent.vue'
 import InputSearchComponent from '../Shared/InputSearchComponent.vue'
 import SelectComponent from '../Shared/SelectComponent.vue'
+import { searchProperties } from '@/services/propertiesService'
+import ModalComponent from '../Home/ModalComponent.vue'
+import type { Propiedad } from '@/models/interfaces/Propiedad.model'
 
-const activeTab = ref('buy')
+const tipoOperacion = ref('Venta')
+const ubicacion = ref('')
+const tipoPropiedad = ref('')
+const ambientes = ref('')
+const precio = ref('')
 
-const setActiveTab = (tab: string) => {
-  activeTab.value = tab
-  if (tab === 'buy') {
-    console.log('estoy ejecutando ' + tab)
-  } else {
-    console.log('estoy ejecutando ' + tab)
-  }
+const showModal = ref(false)
+const response = ref<Propiedad[]>([])
+
+const setActiveTab = (tab: 'Venta' | 'Alquiler') => {
+  tipoOperacion.value = tab
 }
 
-const search = () => {
-  console.log('se envian los resultados')
+const search = async () => {
+  console.log('Tipo de operación:', tipoOperacion.value)
+  console.log('Ubicación:', ubicacion.value)
+  console.log('Tipo de propiedad:', tipoPropiedad.value)
+  console.log('Ambientes:', ambientes.value)
+  console.log('Precio:', precio.value)
+
+  try {
+    const results = await searchProperties({
+      tipoInmueble: tipoPropiedad.value,
+      tipo: tipoOperacion.value,
+      precioMax: precio.value,
+      dormitorios: ambientes.value,
+      ubicacion: ubicacion.value,
+    })
+
+    console.log('✅ Resultados:', results)
+    response.value = results
+    showModal.value = true
+  } catch (error) {
+    console.error('❌ Falló la búsqueda', error)
+  }
 }
 </script>
 

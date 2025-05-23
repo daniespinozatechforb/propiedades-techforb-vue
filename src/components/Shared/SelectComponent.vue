@@ -3,9 +3,12 @@
     <select
       class="dropdown__field"
       :class="{ 'field-standard': fieldStandard }"
-      id="dropdownField"
+      :value="modelValue"
       :placeholder="placeholder"
+      @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
     >
+      <option disabled value="" hidden>{{ placeholder }}</option>
+
       <option v-for="option in options" :key="option" :value="option">
         {{ option }}
       </option>
@@ -17,17 +20,20 @@
 import { withDefaults } from 'vue'
 
 interface Props {
+  modelValue: string
   fieldStandard?: boolean
   placeholder?: string
   options?: string[]
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const props = withDefaults(defineProps<Props>(), {
+const { modelValue, fieldStandard, placeholder, options } = withDefaults(defineProps<Props>(), {
+  modelValue: '',
   fieldStandard: false,
   placeholder: 'Selecciona una opción',
   options: () => [],
 })
+
+defineEmits(['update:modelValue'])
 </script>
 
 <style scoped lang="scss">

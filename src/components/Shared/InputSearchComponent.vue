@@ -6,6 +6,8 @@
       class="input__field field-standard"
       :type="type"
       :placeholder="placeholder"
+      :value="modelValue"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
   </div>
 </template>
@@ -14,6 +16,7 @@
 import { computed } from 'vue'
 
 const props = defineProps<{
+  modelValue: string
   label?: string
   type?: string
   placeholder?: string
