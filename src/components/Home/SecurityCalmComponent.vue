@@ -192,6 +192,9 @@ import building from '@/assets/building.jpg'
     display: flex;
     align-items: center;
     justify-content: center;
+    @media screen and (max-width: 1345px) {
+      margin: 20px 0;
+    }
   }
 }
 

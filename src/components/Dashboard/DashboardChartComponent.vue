@@ -2,7 +2,11 @@
   <div class="chart-container">
     <div class="chart-container-header">
       <p>Analíticas</p>
-      <SelectComponent :options="['Anual', 'Mensual', 'Semanal', 'Diario']" placeholder="Anual" />
+      <SelectComponent
+        v-model="selectedOption"
+        :options="['Anual', 'Mensual', 'Semanal', 'Diario']"
+        placeholder="Anual"
+      />
     </div>
     <canvas ref="revenueChart"></canvas>
   </div>
@@ -14,6 +18,7 @@ import Chart from 'chart.js/auto'
 import SelectComponent from '../Shared/SelectComponent.vue'
 
 const revenueChart = ref<HTMLCanvasElement | null>(null)
+const selectedOption = ref('Anual')
 
 onMounted(() => {
   if (revenueChart.value) {
@@ -75,5 +80,11 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+  display: block;
 }
 </style>

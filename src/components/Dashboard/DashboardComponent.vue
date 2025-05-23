@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref /* computed, onMounted */ } from 'vue'
+import { ref } from 'vue'
 
 import NavbarDashboardComponent from '../Layouts/NavbarDashboardComponent.vue'
 import SidenavDashboardComponent from '../Layouts/SidenavDashboardComponent.vue'
@@ -55,7 +55,6 @@ const onToggleSidenav = () => {
   isSidenavOpen.value = !isSidenavOpen.value
 }
 
-// Suponiendo que `useLoginService` devuelva un reactive o computed
 const user = localStorage.getItem('displayName')
 </script>
 

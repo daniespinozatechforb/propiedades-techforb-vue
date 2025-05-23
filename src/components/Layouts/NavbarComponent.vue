@@ -3,6 +3,9 @@
     <div class="navbar__container">
       <div class="navbar__header">
         <h1>L O G O</h1>
+        <button class="navbar__toggle" @click="isMenuOpen = !isMenuOpen">
+          <span class="material-icons">{{ isMenuOpen ? 'close' : 'menu' }}</span>
+        </button>
       </div>
       <nav class="navbar__navigation" :class="{ active: isMenuOpen }">
         <ul class="link-list">
@@ -11,7 +14,7 @@
           <li><a href="#" class="link-list__item">Propiedades</a></li>
           <li>
             <a href="#" class="link-list__item" v-if="!displayName" @click.prevent="login">Login</a>
-            <a href="#" class="link-list__item" v-else @click.prevent="logout">Logout</a>
+            <a href="/dashboard" class="link-list__item" v-else>Dashboard</a>
           </li>
         </ul>
       </nav>
@@ -22,7 +25,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { signInWithPopup /* auth, provider */ } from '@/firebase'
-import { getAuth, GoogleAuthProvider, signOut } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider /* signOut */ } from 'firebase/auth'
 import router from '@/router'
 
 const isMenuOpen = ref(false)
@@ -44,13 +47,13 @@ const login = () => {
     })
 }
 
-const logout = () => {
+/* const logout = () => {
   signOut(getAuth()).then(() => {
     localStorage.removeItem('displayName')
     displayName.value = null
     router.push('/login')
   })
-}
+} */
 </script>
 
 <style scoped lang="scss">

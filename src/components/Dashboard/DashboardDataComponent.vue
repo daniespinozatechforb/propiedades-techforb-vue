@@ -2,7 +2,11 @@
   <div class="analytics-card">
     <div class="analytics-card__header">
       <span class="dashboard-title">Analíticas</span>
-      <SelectComponent :options="['Anual', 'Mensual', 'Semanal', 'Diario']" placeholder="Anual" />
+      <SelectComponent
+        v-model="selectedOption"
+        :options="['Anual', 'Mensual', 'Semanal', 'Diario']"
+        placeholder="Anual"
+      />
     </div>
 
     <div class="analytics-card__content">
@@ -21,6 +25,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import SelectComponent from '../Shared/SelectComponent.vue'
+
+const selectedOption = ref('Anual')
 
 const salesData = ref([
   { label: 'Via Website', value: 50 },
@@ -52,7 +58,7 @@ const salesData = ref([
   }
 
   &__content {
-    padding: 0 20px;
+    padding: 20px 20px;
     display: flex;
     flex-direction: column;
     gap: 16px;

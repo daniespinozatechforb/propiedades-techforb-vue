@@ -1,5 +1,5 @@
-import type { Transaction } from './interfaces/transactions.model'
 import casaImage from '@/assets/casa.jpg'
+import type { Transaction } from './interfaces/Transactions.model'
 
 export const transactions: Transaction[] = [
   {
