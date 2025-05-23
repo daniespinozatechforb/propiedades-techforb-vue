@@ -24,8 +24,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { signInWithPopup /* auth, provider */ } from '@/firebase'
-import { getAuth, GoogleAuthProvider /* signOut */ } from 'firebase/auth'
+import { signInWithPopup } from '@/firebase'
+import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 import router from '@/router'
 
 const isMenuOpen = ref(false)
@@ -46,14 +46,6 @@ const login = () => {
       console.log(error)
     })
 }
-
-/* const logout = () => {
-  signOut(getAuth()).then(() => {
-    localStorage.removeItem('displayName')
-    displayName.value = null
-    router.push('/login')
-  })
-} */
 </script>
 
 <style scoped lang="scss">

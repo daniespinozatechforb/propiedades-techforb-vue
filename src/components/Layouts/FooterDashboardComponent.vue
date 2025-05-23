@@ -4,9 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-// No necesita lógica
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .footer {

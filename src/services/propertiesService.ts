@@ -1,8 +1,8 @@
 import type { Propiedad } from '@/models/interfaces/Propiedad.model'
 
-export const searchProperties = async (params: Record<string, string>) => {
-  const baseUrl = 'https://propiedades-techforb-nestjs-production.up.railway.app/propiedades'
+const baseUrl = import.meta.env.VITE_BASE_URL
 
+export const searchProperties = async (params: Record<string, string>) => {
   const queryParams = new URLSearchParams(
     Object.entries(params).reduce(
       (acc, [key, value]) => {
@@ -28,10 +28,8 @@ export const searchProperties = async (params: Record<string, string>) => {
 }
 
 export const getAllProperties = async (): Promise<Propiedad[]> => {
-  const url = 'https://propiedades-techforb-nestjs-production.up.railway.app/propiedades'
-
   try {
-    const response = await fetch(url)
+    const response = await fetch(baseUrl)
 
     if (!response.ok) {
       throw new Error(`Error en la solicitud: ${response.status}`)

@@ -44,10 +44,6 @@ const sidenavContent = [
   'Cerrar Sesion',
 ]
 
-/* function logout() {
-  emit('close')
-  router.push('/home')
-} */
 const logout = () => {
   signOut(getAuth()).then(() => {
     localStorage.removeItem('displayName')

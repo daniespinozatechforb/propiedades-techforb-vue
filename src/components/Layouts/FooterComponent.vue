@@ -168,6 +168,7 @@
     display: flex;
     gap: 1rem;
     margin-top: 0.5rem;
+    justify-content: center;
   }
 
   &__bottom {

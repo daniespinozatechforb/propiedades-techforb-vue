@@ -2,6 +2,9 @@
   <section class="feature-section">
     <div class="feature-section__container">
       <div class="feature-section__image-container">
+        <div class="propiedad-sonada">
+          <h1>Tu propiedad soñada, a solo un click!</h1>
+        </div>
         <img :src="building" alt="Edificio" class="feature-section__image" />
       </div>
       <div class="feature-section__info-container">
@@ -156,6 +159,19 @@ import building from '@/assets/building.jpg'
 </script>
 
 <style scoped lang="scss">
+.propiedad-sonada {
+  position: absolute;
+  width: 206px;
+  height: 102px;
+  top: 55px;
+  left: 152px;
+  z-index: 100;
+}
+
+.propiedad-sonada h1 {
+  color: #545f71;
+}
+
 .feature-section {
   width: 100%;
   background: #fcfcfb;
